@@ -186,7 +186,7 @@ docker run -d -p 6379:6379 redis:alpine
                     <div id="streamlit-status" class="status-indicator">Checking status...</div>
                     <a id="streamlit-link" href="#" class="live-link">Open Streamlit App</a>
                     <div class="command">
-docker run -p 8501:8501 streamlit/streamlit:latest
+docker run -p 8501:8501 python:3.11-alpine sh -c "pip install streamlit && streamlit hello --server.port=8501 --server.address=0.0.0.0"
                     </div>
                 </div>
             </div>
@@ -221,7 +221,7 @@ docker stop test-redis && docker rm test-redis
             <h4>Option 3: Streamlit Web App</h4>
             <div class="command">
 # Run Streamlit hello world app
-docker run -p 8501:8501 streamlit/streamlit:latest
+docker run -p 8501:8501 python:3.11-alpine sh -c "pip install streamlit && streamlit hello --server.port=8501 --server.address=0.0.0.0"
 
 # Then open http://localhost:8501 in your browser
 # Press Ctrl+C to stop
@@ -266,7 +266,7 @@ curl localhost:8080
                     redisLink.className = 'live-link unavailable';
                     redisLink.textContent = 'Run in Terminal';
                     
-                    streamlitStatus.textContent = 'Run locally: docker run -p 8501:8501 streamlit/streamlit:latest';
+                    streamlitStatus.textContent = 'Run locally: docker run -p 8501:8501 python:3.11-alpine sh -c "pip install streamlit && streamlit hello"';
                     streamlitStatus.className = 'status-indicator status-local';
                     streamlitLink.href = 'http://localhost:8501';
                     streamlitLink.className = 'live-link';

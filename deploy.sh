@@ -28,7 +28,6 @@ echo "Pulling Docker images from DockerHub..."
 sudo docker pull nginx:alpine
 sudo docker pull redis:alpine
 sudo docker pull python:3.11-alpine
-sudo docker pull streamlit/streamlit:latest
 
 echo "Starting Redis database container..."
 sudo docker run -d \
@@ -49,7 +48,8 @@ sudo docker run -d \
     --name egle-streamlit-demo \
     -p 8501:8501 \
     --restart unless-stopped \
-    streamlit/streamlit:latest
+    python:3.11-alpine \
+    sh -c "pip install streamlit && streamlit hello --server.port=8501 --server.address=0.0.0.0"
 
 echo "Verifying containers are running..."
 sudo docker ps | grep egle-
