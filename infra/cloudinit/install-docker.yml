@@ -1,0 +1,8 @@
+#cloud-config
+packages:
+  - docker.io
+runcmd:
+  - curl -L https://github.com/docker/compose/releases/latest/download/docker-compose-$(uname -s)-$(uname -m) -o /usr/local/bin/docker-compose
+  - chmod +x /usr/local/bin/docker-compose
+  - git clone https://github.com/yourname/your‑site.git /opt/site
+  - cd /opt/site && docker compose up -d

@@ -1,0 +1,64 @@
+# Node modules
+node_modules/
+
+# Environment variables
+.env
+.env.*
+
+# Terraform variable files
+*.tfvars
+*.tfvars.json
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# OS generated files
+.DS_Store
+Thumbs.db
+
+# Build output
+dist/
+build/
+out/
+coverage/
+
+# IDE files
+.vscode/
+.idea/
+*.swp
+
+# Dependency directories
+bower_components/
+jspm_packages/
+
+# Misc
+*.local
+*.secret
+*.bak
+*.tmp
+*.log
+
+# Private keys and certificates
+*.pem
+*.key
+*.crt
+*.p12
+
+# Docker
+*.env.docker
+docker-compose.override.yml
+
+# Python cache
+__pycache__/
+*.pyc
+
+# Test output
+test-results/
+junit.xml
+
+# Misc config
+*.sublime-workspace
+*.sublime-project
