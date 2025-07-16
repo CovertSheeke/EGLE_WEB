@@ -26,3 +26,23 @@ docker run --rm -it \
 ```
 
 and you should see a site on [http://localhost:8080](http://localhost:8080)
+
+---
+
+## Deploying to Hetzner with Terraform
+
+To deploy your site to Hetzner using Terraform, follow these steps:
+
+1. **Initialize Terraform**  
+    Run `terraform init` in your project directory to initialize the configuration.
+
+2. **Preview the Deployment**  
+    Use `terraform plan` to see what changes will be made.
+
+3. **Apply the Configuration**  
+    Deploy resources with `terraform apply`. Confirm the action when prompted.
+
+4. **Destroy Resources**  
+    When you want to tear down the infrastructure, run `terraform destroy`.
+
+Make sure your `terraform.tf` files are configured for Hetzner and that you have the necessary API tokens set in your environment.
