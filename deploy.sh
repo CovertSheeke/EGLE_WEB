@@ -21,21 +21,31 @@ if ! command -v docker &> /dev/null; then
 fi
 
 echo "Stopping existing Docker containers..."
-sudo docker stop egle-nginx-demo 2>/dev/null || true
-sudo docker rm egle-nginx-demo 2>/dev/null || true
+sudo docker stop egle-nginx-demo egle-redis-demo 2>/dev/null || true
+sudo docker rm egle-nginx-demo egle-redis-demo 2>/dev/null || true
 
-echo "Pulling latest nginx image from DockerHub..."
+echo "Pulling Docker images from DockerHub..."
 sudo docker pull nginx:alpine
+sudo docker pull redis:alpine
+sudo docker pull python:3.11-alpine
 
-echo "Starting real Docker container from DockerHub..."
+echo "Starting Redis database container..."
+sudo docker run -d \
+    --name egle-redis-demo \
+    -p 6379:6379 \
+    --restart unless-stopped \
+    redis:alpine
+
+echo "Starting Nginx web server container..."
 sudo docker run -d \
     --name egle-nginx-demo \
     -p 8080:80 \
     --restart unless-stopped \
     nginx:alpine
 
-echo "Verifying container is running..."
-sudo docker ps | grep egle-nginx-demo
+echo "Verifying containers are running..."
+sudo docker ps | grep egle-
+sudo docker exec egle-redis-demo redis-cli ping
 
 echo "Reloading nginx..."
 systemctl reload nginx
