@@ -166,27 +166,68 @@
         </div>
 
         <div class="demo-section">
-            <h3>Live Demo</h3>
-            <p>This is what the containerized application looks like when running:</p>
-            <div class="demo-content">
-                <h2>🐳 Hello from Docker!</h2>
-                <p>Welcome to my containerized web application</p>
-                <p>Container ID: egle-hello-world-v1.0</p>
-                <p>Status: ✅ Running successfully</p>
-                <p>Built with: Docker + Nginx + Custom HTML</p>
+            <h3>Live Docker Container</h3>
+            <p>This is an actual Docker container running on the server:</p>
+            <div style="text-align: center; margin: 2rem 0;">
+                <iframe id="docker-iframe"
+                        width="100%" 
+                        height="400" 
+                        style="border: 3px solid #444; border-radius: 8px; background: #f0f0f0;">
+                    <p>Docker container not accessible. <a id="direct-link-fallback" href="#" target="_blank">Click here to view directly</a></p>
+                </iframe>
+            </div>
+            <p><strong>Direct Link:</strong> <a id="direct-link" href="#" target="_blank">View Docker Container</a></p>
+            <p><em>This iframe shows a real Docker container running nginx:alpine with custom content.</em></p>
+            <div id="local-notice" style="display: none; background: #fff3cd; color: #856404; padding: 1rem; border-radius: 4px; margin-top: 1rem;">
+                <strong>Local Testing:</strong> The Docker container iframe is not available when testing locally. Deploy to server to see the live container.
             </div>
         </div>
 
-        <div class="code-section">
-            <h3>How to Run This Container</h3>
-            <p>You can run this exact container on any system with Docker installed:</p>
+        <script>
+            // Dynamically set the Docker container URL based on environment
+            function setupDockerDemo() {
+                const isLocal = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
+                const dockerUrl = isLocal ? null : `${window.location.protocol}//${window.location.hostname}:8080`;
+                
+                const iframe = document.getElementById('docker-iframe');
+                const directLink = document.getElementById('direct-link');
+                const directLinkFallback = document.getElementById('direct-link-fallback');
+                const localNotice = document.getElementById('local-notice');
+                
+                if (isLocal) {
+                    // Local testing mode
+                    iframe.style.display = 'none';
+                    localNotice.style.display = 'block';
+                    directLink.href = 'http://localhost:8080';
+                    directLink.textContent = 'Test Docker Locally (http://localhost:8080)';
+                    directLinkFallback.href = 'http://localhost:8080';
+                } else {
+                    // Production mode
+                    iframe.src = dockerUrl;
+                    directLink.href = dockerUrl;
+                    directLink.textContent = dockerUrl;
+                    directLinkFallback.href = dockerUrl;
+                }
+            }
             
-            <h4>Option 1: Using the existing Nginx image (Quick test)</h4>
+            // Run setup when page loads
+            setupDockerDemo();
+        </script>
+
+        <div class="code-section">
+            <h3>How This Container Is Running</h3>
+            <p>This is the actual command running the container on the server:</p>
+            
             <div class="command">
-docker run --rm -p 8080:80 --name hello-world-demo nginx:alpine
+sudo docker run -d \<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;--name egle-hello-world \<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;-p 8080:80 \<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;-v /var/www/html/docker-container.html:/usr/share/nginx/html/index.html:ro \<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;--restart unless-stopped \<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;nginx:alpine
             </div>
             
-            <h4>Option 2: Build custom container with this project</h4>
+            <h4>To run locally:</h4>
             <div class="command">
 # Clone the repository<br/>
 git clone https://github.com/covertsheeke/EGLE_WEB.git<br/>
@@ -194,11 +235,13 @@ cd EGLE_WEB
             </div>
             
             <div class="command">
-# Run with custom content<br/>
-docker run --rm -p 8080:80 -v "$(pwd)/site":/usr/share/nginx/html:ro nginx:alpine
+# Run the same container locally<br/>
+docker run --rm -p 8080:80 \<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;-v "$(pwd)/site/docker-container.html":/usr/share/nginx/html/index.html:ro \<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;nginx:alpine
             </div>
             
-            <p>Then visit <strong>http://localhost:8080</strong> to see the application running!</p>
+            <p>Then visit <strong>http://localhost:8080</strong> to see the same container locally!</p>
         </div>
 
         <div class="code-section">

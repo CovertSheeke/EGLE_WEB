@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Docker Hello World</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            text-align: center;
+            padding: 2rem;
+            margin: 0;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        .container {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 3rem;
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+        .docker-icon {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+        }
+        .info {
+            background: rgba(0, 0, 0, 0.2);
+            padding: 1rem;
+            border-radius: 8px;
+            margin: 1rem 0;
+        }
+        .status {
+            color: #4CAF50;
+            font-weight: bold;
+        }
+        .timestamp {
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="docker-icon">🐳</div>
+        <h1>Hello from Docker!</h1>
+        <p>This page is served from a real Docker container</p>
+        
+        <div class="info">
+            <p><strong>Container:</strong> nginx:alpine</p>
+            <p><strong>Status:</strong> <span class="status">✅ Running</span></p>
+            <p><strong>Port:</strong> 8080 → 80</p>
+            <p><strong>Base Image:</strong> Alpine Linux</p>
+        </div>
+        
+        <p>🚀 Successfully deployed via Docker on Hetzner Cloud</p>
+        <p class="timestamp">Container started: <span id="timestamp"></span></p>
+    </div>
+
+    <script>
+        // Show current timestamp
+        document.getElementById('timestamp').textContent = new Date().toLocaleString();
+        
+        // Add some interactivity
+        document.querySelector('.container').addEventListener('click', function() {
+            this.style.transform = this.style.transform === 'scale(1.05)' ? 'scale(1)' : 'scale(1.05)';
+        });
+    </script>
+</body>
+</html>

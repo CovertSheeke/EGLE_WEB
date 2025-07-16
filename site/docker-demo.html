@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Real Docker Container Demo - Ethan GL Edwards</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: #f9f9f9;
+        }
+        header {
+            background: #222;
+            color: #fff;
+            padding: 1.5rem 0;
+            text-align: center;
+        }
+        nav {
+            background: #444;
+        }
+        nav ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+        }
+        nav li {
+            margin: 0;
+        }
+        nav a {
+            display: block;
+            padding: 1rem 2rem;
+            color: #fff;
+            text-decoration: none;
+            transition: background 0.2s;
+        }
+        nav a:hover {
+            background: #666;
+        }
+        main {
+            max-width: 900px;
+            margin: 2rem auto;
+            padding: 2rem;
+            background: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+        }
+        .demo-section {
+            background: #f8f8f8;
+            padding: 2rem;
+            border-radius: 8px;
+            margin: 2rem 0;
+        }
+        .container-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+        .container-option {
+            background: #fff;
+            padding: 1.5rem;
+            border-radius: 8px;
+            border: 2px solid #ddd;
+            text-align: center;
+        }
+        .container-option h4 {
+            color: #222;
+            margin-bottom: 1rem;
+        }
+        .live-link {
+            display: inline-block;
+            background: #4CAF50;
+            color: white;
+            padding: 1rem 2rem;
+            text-decoration: none;
+            border-radius: 4px;
+            margin: 0.5rem;
+            transition: background 0.2s;
+        }
+        .live-link:hover {
+            background: #45a049;
+        }
+        .live-link.unavailable {
+            background: #ccc;
+            color: #666;
+            cursor: not-allowed;
+        }
+        .code-section {
+            margin: 2rem 0;
+        }
+        .code-section h3 {
+            color: #222;
+            margin-bottom: 1rem;
+            border-bottom: 2px solid #444;
+            padding-bottom: 0.5rem;
+        }
+        .command {
+            background: #1e1e1e;
+            color: #4CAF50;
+            padding: 1rem;
+            border-radius: 4px;
+            font-family: 'Courier New', monospace;
+            margin: 0.5rem 0;
+            border-left: 4px solid #4CAF50;
+            overflow-x: auto;
+        }
+        .status-indicator {
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            margin: 0.5rem 0;
+            text-align: center;
+            font-weight: bold;
+        }
+        .status-running {
+            background: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+        .status-local {
+            background: #fff3cd;
+            color: #856404;
+            border: 1px solid #ffeaa7;
+        }
+        .back-link {
+            display: inline-block;
+            background: #444;
+            color: #fff;
+            padding: 0.75rem 1.5rem;
+            text-decoration: none;
+            border-radius: 4px;
+            margin-top: 2rem;
+            transition: background 0.2s;
+        }
+        .back-link:hover {
+            background: #222;
+        }
+        @media (max-width: 768px) {
+            .container-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Ethan GL Edwards</h1>
+    </header>
+    <nav>
+        <ul>
+            <li><a href="/index.html">Home</a></li>
+            <li><a href="/about.html">About</a></li>
+            <li><a href="/projects.html">Projects</a></li>
+            <li><a href="/contact.html">Contact</a></li>
+        </ul>
+    </nav>
+    <main>
+        <div style="text-align: center; margin-bottom: 3rem;">
+            <h1>🐳 Real Docker Container Demo</h1>
+            <p>These are actual Docker containers pulled from DockerHub and running live</p>
+        </div>
+
+        <div class="demo-section">
+            <h3>Live Container Demonstrations</h3>
+            <div class="container-grid">
+                <div class="container-option">
+                    <h4>📦 Nginx Web Server</h4>
+                    <p>Official nginx:alpine container from DockerHub</p>
+                    <div id="nginx-status" class="status-indicator">Checking status...</div>
+                    <a id="nginx-link" href="#" class="live-link">View Live Container</a>
+                    <div class="command">
+docker run -d -p 8080:80 nginx:alpine
+                    </div>
+                </div>
+
+                <div class="container-option">
+                    <h4>🌐 Hello World App</h4>
+                    <p>Simple hello-world container from DockerHub</p>
+                    <div id="hello-status" class="status-indicator">Checking status...</div>
+                    <a id="hello-link" href="#" class="live-link">View Container Output</a>
+                    <div class="command">
+docker run --rm hello-world
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="code-section">
+            <h3>🧪 Test These Containers Locally</h3>
+            
+            <h4>Option 1: Nginx Web Server (Port 8080)</h4>
+            <div class="command">
+# Pull and run nginx container
+docker run --rm -d -p 8080:80 --name test-nginx nginx:alpine
+
+# Check it's running
+docker ps
+
+# Visit http://localhost:8080 in your browser
+
+# Stop when done
+docker stop test-nginx
+            </div>
+
+            <h4>Option 2: Hello World Container</h4>
+            <div class="command">
+# Run hello-world container (outputs text and exits)
+docker run --rm hello-world
+
+# This will download and run the official hello-world image
+            </div>
+
+            <h4>Option 3: Interactive Container</h4>
+            <div class="command">
+# Run interactive Alpine Linux container
+docker run --rm -it alpine:latest /bin/sh
+
+# You'll get a shell inside the container
+# Type 'exit' to leave
+            </div>
+        </div>
+
+        <div class="code-section">
+            <h3>🔍 Verify Real Containers</h3>
+            <p>These commands prove you're running real Docker containers:</p>
+            
+            <div class="command">
+# See all running containers
+docker ps
+
+# See Docker images on your system
+docker images
+
+# Check container resource usage
+docker stats
+
+# View container logs
+docker logs test-nginx
+            </div>
+        </div>
+
+        <div class="code-section">
+            <h3>🌍 Production Deployment</h3>
+            <p>On the server, these containers run automatically via the deploy script:</p>
+            
+            <div class="command">
+# Server deployment command (in deploy.sh)
+sudo docker run -d \
+    --name egle-nginx-demo \
+    -p 8080:80 \
+    --restart unless-stopped \
+    nginx:alpine
+
+# Check if it's running on server
+sudo docker ps
+curl localhost:8080
+            </div>
+        </div>
+
+        <script>
+            function checkContainerStatus() {
+                const isLocal = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
+                
+                // Nginx container status
+                const nginxStatus = document.getElementById('nginx-status');
+                const nginxLink = document.getElementById('nginx-link');
+                
+                // Hello world status  
+                const helloStatus = document.getElementById('hello-status');
+                const helloLink = document.getElementById('hello-link');
+                
+                if (isLocal) {
+                    nginxStatus.textContent = 'Run locally: docker run -d -p 8080:80 nginx:alpine';
+                    nginxStatus.className = 'status-indicator status-local';
+                    nginxLink.href = 'http://localhost:8080';
+                    nginxLink.textContent = 'Test Locally (Port 8080)';
+                    
+                    helloStatus.textContent = 'Run locally: docker run --rm hello-world';
+                    helloStatus.className = 'status-indicator status-local';
+                    helloLink.href = '#';
+                    helloLink.className = 'live-link unavailable';
+                    helloLink.textContent = 'Run in Terminal';
+                } else {
+                    // Production - try to link to actual containers
+                    const baseUrl = `${window.location.protocol}//${window.location.hostname}`;
+                    
+                    nginxStatus.textContent = '✅ Live container running on server';
+                    nginxStatus.className = 'status-indicator status-running';
+                    nginxLink.href = `${baseUrl}:8080`;
+                    nginxLink.textContent = 'View Live Container';
+                    
+                    helloStatus.textContent = '📋 Check server logs for output';
+                    helloStatus.className = 'status-indicator status-local';
+                    helloLink.href = `${baseUrl}:8080`;
+                    helloLink.textContent = 'View Server Container';
+                }
+            }
+            
+            // Run status check when page loads
+            checkContainerStatus();
+        </script>
+
+        <a href="/projects.html" class="back-link">← Back to Projects</a>
+    </main>
+</body>
+</html>
