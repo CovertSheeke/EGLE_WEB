@@ -21,13 +21,14 @@ if ! command -v docker &> /dev/null; then
 fi
 
 echo "Stopping existing Docker containers..."
-sudo docker stop egle-nginx-demo egle-redis-demo 2>/dev/null || true
-sudo docker rm egle-nginx-demo egle-redis-demo 2>/dev/null || true
+sudo docker stop egle-nginx-demo egle-redis-demo egle-streamlit-demo 2>/dev/null || true
+sudo docker rm egle-nginx-demo egle-redis-demo egle-streamlit-demo 2>/dev/null || true
 
 echo "Pulling Docker images from DockerHub..."
 sudo docker pull nginx:alpine
 sudo docker pull redis:alpine
 sudo docker pull python:3.11-alpine
+sudo docker pull streamlit/streamlit:latest
 
 echo "Starting Redis database container..."
 sudo docker run -d \
@@ -43,6 +44,13 @@ sudo docker run -d \
     --restart unless-stopped \
     nginx:alpine
 
+echo "Starting Streamlit app container..."
+sudo docker run -d \
+    --name egle-streamlit-demo \
+    -p 8501:8501 \
+    --restart unless-stopped \
+    streamlit/streamlit:latest
+
 echo "Verifying containers are running..."
 sudo docker ps | grep egle-
 sudo docker exec egle-redis-demo redis-cli ping
@@ -51,7 +59,10 @@ echo "Reloading nginx..."
 systemctl reload nginx
 
 echo "✅ Deployment complete!"
-echo "🐳 Docker container running on port 8080"
+echo "🐳 Docker containers running:"
+echo "   - Redis database on port 6379"
+echo "   - Nginx web server on port 8080"
+echo "   - Streamlit app on port 8501"
 echo "📱 Main website running on port 80"
 EOF
 

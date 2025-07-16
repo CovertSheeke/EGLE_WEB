@@ -56,7 +56,7 @@
         }
         .container-grid {
             display: grid;
-            grid-template-columns: 1fr 1fr;
+            grid-template-columns: 1fr 1fr 1fr;
             gap: 2rem;
             margin: 2rem 0;
         }
@@ -78,7 +78,7 @@
             padding: 1rem 2rem;
             text-decoration: none;
             border-radius: 4px;
-            margin: 0.5rem;
+            margin: 1rem 0;
             transition: background 0.2s;
         }
         .live-link:hover {
@@ -86,69 +86,62 @@
         }
         .live-link.unavailable {
             background: #ccc;
-            color: #666;
             cursor: not-allowed;
-        }
-        .code-section {
-            margin: 2rem 0;
-        }
-        .code-section h3 {
-            color: #222;
-            margin-bottom: 1rem;
-            border-bottom: 2px solid #444;
-            padding-bottom: 0.5rem;
-        }
-        .command {
-            background: #1e1e1e;
-            color: #4CAF50;
-            padding: 1rem;
-            border-radius: 4px;
-            font-family: 'Courier New', monospace;
-            margin: 0.5rem 0;
-            border-left: 4px solid #4CAF50;
-            overflow-x: auto;
         }
         .status-indicator {
             padding: 0.5rem 1rem;
+            margin: 1rem 0;
             border-radius: 4px;
-            margin: 0.5rem 0;
-            text-align: center;
             font-weight: bold;
         }
         .status-running {
             background: #d4edda;
             color: #155724;
-            border: 1px solid #c3e6cb;
         }
         .status-local {
-            background: #fff3cd;
-            color: #856404;
-            border: 1px solid #ffeaa7;
+            background: #e2e3e5;
+            color: #6c757d;
+        }
+        .command {
+            background: #333;
+            color: #0f0;
+            padding: 1rem;
+            border-radius: 4px;
+            font-family: monospace;
+            margin: 1rem 0;
+            white-space: pre-wrap;
+        }
+        .code-section {
+            background: #f0f0f0;
+            padding: 2rem;
+            border-radius: 8px;
+            margin: 2rem 0;
+        }
+        .code-section h3 {
+            color: #333;
+            margin-bottom: 1rem;
+        }
+        .code-section h4 {
+            color: #555;
+            margin: 1.5rem 0 0.5rem 0;
         }
         .back-link {
             display: inline-block;
-            background: #444;
-            color: #fff;
-            padding: 0.75rem 1.5rem;
-            text-decoration: none;
-            border-radius: 4px;
             margin-top: 2rem;
-            transition: background 0.2s;
+            color: #666;
+            text-decoration: none;
         }
         .back-link:hover {
-            background: #222;
-        }
-        @media (max-width: 768px) {
-            .container-grid {
-                grid-template-columns: 1fr;
-            }
+            color: #333;
         }
     </style>
 </head>
 <body>
     <header>
         <h1>Ethan GL Edwards</h1>
+        <p>Software Engineer & Cloud Architecture</p>
     </header>
+
     <nav>
         <ul>
             <li><a href="/index.html">Home</a></li>
@@ -157,6 +150,7 @@
             <li><a href="/contact.html">Contact</a></li>
         </ul>
     </nav>
+
     <main>
         <div style="text-align: center; margin-bottom: 3rem;">
             <h1>🐳 Real Docker Container Demo</h1>
@@ -167,7 +161,7 @@
             <h3>Live Container Demonstrations</h3>
             <div class="container-grid">
                 <div class="container-option">
-                    <h4>� Interactive Python Console</h4>
+                    <h4>🐍 Interactive Python Console</h4>
                     <p>Real Python interpreter running in Docker container</p>
                     <div id="python-status" class="status-indicator">Checking status...</div>
                     <a id="python-link" href="#" class="live-link">Run Python Console</a>
@@ -185,6 +179,16 @@ docker run -it --rm python:3.11-alpine python
 docker run -d -p 6379:6379 redis:alpine
                     </div>
                 </div>
+
+                <div class="container-option">
+                    <h4>📈 Streamlit Web App</h4>
+                    <p>Interactive data app with hello world demo</p>
+                    <div id="streamlit-status" class="status-indicator">Checking status...</div>
+                    <a id="streamlit-link" href="#" class="live-link">Open Streamlit App</a>
+                    <div class="command">
+docker run -p 8501:8501 streamlit/streamlit:latest
+                    </div>
+                </div>
             </div>
         </div>
 
@@ -198,85 +202,37 @@ docker run -it --rm python:3.11-alpine python
 
 # Inside Python container, try:
 # >>> import sys
-# >>> sys.version
-# >>> print("Hello from Docker Python!")
+# >>> print(sys.version)
 # >>> exit()
             </div>
 
             <h4>Option 2: Redis Database</h4>
             <div class="command">
-# Start Redis container
-docker run -d -p 6379:6379 --name test-redis redis:alpine
+# Start Redis container in background
+docker run -d --name test-redis -p 6379:6379 redis:alpine
 
-# Connect to Redis (in another terminal)
-docker exec -it test-redis redis-cli
+# Test Redis connection
+docker exec -it test-redis redis-cli ping
 
-# Inside Redis, try:
-# > SET greeting "Hello from Docker Redis!"
-# > GET greeting
-# > exit
-
-# Clean up
+# Cleanup
 docker stop test-redis && docker rm test-redis
             </div>
 
-            <h4>Option 3: Node.js REPL</h4>
+            <h4>Option 3: Streamlit Web App</h4>
             <div class="command">
-# Run interactive Node.js
-docker run -it --rm node:alpine
+# Run Streamlit hello world app
+docker run -p 8501:8501 streamlit/streamlit:latest
 
-# Inside Node container, try:
-# > console.log("Hello from Docker Node!");
-# > process.version
-# > .exit
+# Then open http://localhost:8501 in your browser
+# Press Ctrl+C to stop
             </div>
 
-            <h4>Option 4: Alpine Linux Shell</h4>
+            <h4>Option 4: Test all containers running</h4>
             <div class="command">
-# Get shell inside Alpine Linux container
-docker run -it --rm alpine:latest /bin/sh
-
-# Inside container, try:
-# $ cat /etc/os-release
-# $ whoami
-# $ ls -la
-# $ exit
-            </div>
-        </div>
-
-        <div class="code-section">
-            <h3>🔍 Verify Real Containers</h3>
-            <p>These commands prove you're running real Docker containers:</p>
-            
-            <div class="command">
-# See all running containers
+# Check what containers are running
 docker ps
 
-# See Docker images on your system
-docker images
-
-# Check container resource usage
-docker stats
-
-# View container logs
-docker logs test-nginx
-            </div>
-        </div>
-
-        <div class="code-section">
-            <h3>🌍 Production Deployment</h3>
-            <p>On the server, these containers run automatically via the deploy script:</p>
-            
-            <div class="command">
-# Server deployment command (in deploy.sh)
-sudo docker run -d \
-    --name egle-nginx-demo \
-    -p 8080:80 \
-    --restart unless-stopped \
-    nginx:alpine
-
-# Check if it's running on server
-sudo docker ps
+# Access Nginx web server (if running)
 curl localhost:8080
             </div>
         </div>
@@ -293,6 +249,10 @@ curl localhost:8080
                 const redisStatus = document.getElementById('redis-status');
                 const redisLink = document.getElementById('redis-link');
                 
+                // Streamlit status
+                const streamlitStatus = document.getElementById('streamlit-status');
+                const streamlitLink = document.getElementById('streamlit-link');
+                
                 if (isLocal) {
                     pythonStatus.textContent = 'Run locally: docker run -it --rm python:3.11-alpine python';
                     pythonStatus.className = 'status-indicator status-local';
@@ -305,6 +265,12 @@ curl localhost:8080
                     redisLink.href = '#';
                     redisLink.className = 'live-link unavailable';
                     redisLink.textContent = 'Run in Terminal';
+                    
+                    streamlitStatus.textContent = 'Run locally: docker run -p 8501:8501 streamlit/streamlit:latest';
+                    streamlitStatus.className = 'status-indicator status-local';
+                    streamlitLink.href = 'http://localhost:8501';
+                    streamlitLink.className = 'live-link';
+                    streamlitLink.textContent = 'Open Streamlit App';
                 } else {
                     // Production
                     const baseUrl = `${window.location.protocol}//${window.location.hostname}`;
@@ -315,11 +281,17 @@ curl localhost:8080
                     pythonLink.className = 'live-link unavailable';
                     pythonLink.textContent = 'SSH Required for Interactive';
                     
-                    redisStatus.textContent = '� Redis running on server';
+                    redisStatus.textContent = '📊 Redis running on server';
                     redisStatus.className = 'status-indicator status-running';
                     redisLink.href = '#';
                     redisLink.className = 'live-link unavailable';
                     redisLink.textContent = 'Database (No Web UI)';
+                    
+                    streamlitStatus.textContent = '📈 Streamlit app running live';
+                    streamlitStatus.className = 'status-indicator status-running';
+                    streamlitLink.href = `${baseUrl}:8501`;
+                    streamlitLink.className = 'live-link';
+                    streamlitLink.textContent = 'Open Streamlit App';
                 }
             }
             
