@@ -1,0 +1,16 @@
+#cloud-config
+package_update: true
+package_upgrade: true
+
+packages:
+  - nginx
+  - git
+  - curl
+
+runcmd:
+  - systemctl start nginx
+  - systemctl enable nginx
+  - git clone https://github.com/covertsheeke/EGLE_WEB.git /tmp/website
+  - cp -r /tmp/website/* /var/www/html/
+  - chown -R www-data:www-data /var/www/html
+  - systemctl restart nginx

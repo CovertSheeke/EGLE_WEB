@@ -8,7 +8,6 @@ terraform {
     required_version = ">= 0.13"
 }
 
-
 # Configure the Hetzner Cloud provider with the API token
 provider "hcloud" {
     token = var.hcloud_token 
