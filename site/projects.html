@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Projects - Ethan GL Edwards</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: #f9f9f9;
+        }
+        header {
+            background: #222;
+            color: #fff;
+            padding: 1.5rem 0;
+            text-align: center;
+        }
+        nav {
+            background: #444;
+        }
+        nav ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+        }
+        nav li {
+            margin: 0;
+        }
+        nav a {
+            display: block;
+            padding: 1rem 2rem;
+            color: #fff;
+            text-decoration: none;
+            transition: background 0.2s;
+        }
+        nav a:hover {
+            background: #666;
+        }
+        nav a.active {
+            background: #666;
+        }
+        main {
+            max-width: 800px;
+            margin: 2rem auto;
+            padding: 2rem;
+            background: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+        }
+        .projects-intro {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+        .projects-intro h2 {
+            color: #222;
+            margin-bottom: 1rem;
+        }
+        .project-grid {
+            display: grid;
+            gap: 2rem;
+            margin: 2rem 0;
+            display: none;
+        }
+        .project-card {
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 1.5rem;
+            background: #fafafa;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .project-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+        .project-card h3 {
+            color: #222;
+            margin-bottom: 0.5rem;
+            border-bottom: 2px solid #444;
+            padding-bottom: 0.5rem;
+        }
+        .project-meta {
+            color: #666;
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+        .project-tech {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin: 1rem 0;
+        }
+        .tech-tag {
+            background: #222;
+            color: #fff;
+            padding: 0.25rem 0.75rem;
+            border-radius: 12px;
+            font-size: 0.8rem;
+        }
+        .project-links {
+            margin-top: 1rem;
+        }
+        .project-links a {
+            color: #444;
+            text-decoration: none;
+            margin-right: 1rem;
+            padding: 0.5rem 1rem;
+            border: 1px solid #444;
+            border-radius: 4px;
+            transition: all 0.2s;
+        }
+        .project-links a:hover {
+            background: #444;
+            color: #fff;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Ethan GL Edwards</h1>
+    </header>
+    <nav>
+        <ul>
+            <li><a href="/index.html">Home</a></li>
+            <li><a href="/about.html">About</a></li>
+            <li><a href="/projects.html" class="active">Projects</a></li>
+            <li><a href="/contact.html">Contact</a></li>
+        </ul>
+    </nav>
+    <main>
+        <div class="projects-intro">
+            <h2>My Projects</h2>
+            <p>Coming soon! I'm currently working on exciting projects that I'll be showcasing here.</p>
+        </div>
+
+        <div class="project-grid">
+            <div class="project-card">
+                <h3>EGLE Web Infrastructure</h3>
+                <div class="project-meta">Cloud Infrastructure • 2025</div>
+                <p>A complete web hosting solution built with Terraform and Hetzner Cloud, featuring automated deployment, floating IP management, and cloud-init configuration for seamless server provisioning.</p>
+                <div class="project-tech">
+                    <span class="tech-tag">Terraform</span>
+                    <span class="tech-tag">Hetzner Cloud</span>
+                    <span class="tech-tag">Cloud-Init</span>
+                    <span class="tech-tag">Nginx</span>
+                    <span class="tech-tag">Ubuntu</span>
+                </div>
+                <div class="project-links">
+                    <a href="#">View Code</a>
+                    <a href="#">Live Demo</a>
+                </div>
+            </div>
+
+            <div class="project-card">
+                <h3>Portfolio Website</h3>
+                <div class="project-meta">Web Development • 2025</div>
+                <p>A responsive portfolio website showcasing professional work and projects. Built with clean, modern design principles and optimized for performance across all devices.</p>
+                <div class="project-tech">
+                    <span class="tech-tag">HTML5</span>
+                    <span class="tech-tag">CSS3</span>
+                    <span class="tech-tag">JavaScript</span>
+                    <span class="tech-tag">Responsive Design</span>
+                </div>
+                <div class="project-links">
+                    <a href="#">View Code</a>
+                    <a href="#">Live Demo</a>
+                </div>
+            </div>
+
+            <div class="project-card">
+                <h3>Automated Deployment Pipeline</h3>
+                <div class="project-meta">DevOps • 2025</div>
+                <p>Streamlined deployment workflow that automatically updates web content from Git repositories to production servers, including file synchronization and service management.</p>
+                <div class="project-tech">
+                    <span class="tech-tag">Bash Scripting</span>
+                    <span class="tech-tag">Git</span>
+                    <span class="tech-tag">SSH</span>
+                    <span class="tech-tag">Automation</span>
+                </div>
+                <div class="project-links">
+                    <a href="#">View Code</a>
+                    <a href="#">Documentation</a>
+                </div>
+            </div>
+        </div>
+
+        <div style="text-align: center; margin-top: 3rem; padding: 2rem; background: #f0f0f0; border-radius: 8px; display: none;">
+            <h3>Interested in collaborating?</h3>
+            <p>I'm always open to discussing new projects and opportunities.</p>
+            <a href="/contact.html" style="display: inline-block; background: #222; color: #fff; padding: 1rem 2rem; text-decoration: none; border-radius: 4px; margin-top: 1rem;">Get In Touch</a>
+        </div>
+    </main>
+</body>
+</html>

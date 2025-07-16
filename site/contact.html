@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Contact - Ethan GL Edwards</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: #f9f9f9;
+        }
+        header {
+            background: #222;
+            color: #fff;
+            padding: 1.5rem 0;
+            text-align: center;
+        }
+        nav {
+            background: #444;
+        }
+        nav ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+        }
+        nav li {
+            margin: 0;
+        }
+        nav a {
+            display: block;
+            padding: 1rem 2rem;
+            color: #fff;
+            text-decoration: none;
+            transition: background 0.2s;
+        }
+        nav a:hover {
+            background: #666;
+        }
+        nav a.active {
+            background: #666;
+        }
+        main {
+            max-width: 800px;
+            margin: 2rem auto;
+            padding: 2rem;
+            background: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+        }
+        .contact-intro {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+        .contact-intro h2 {
+            color: #222;
+            margin-bottom: 1rem;
+        }
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            margin: 2rem 0;
+        }
+        .contact-info {
+            background: #f8f8f8;
+            padding: 2rem;
+            border-radius: 8px;
+        }
+        .contact-info h3 {
+            color: #222;
+            margin-bottom: 1.5rem;
+            border-bottom: 2px solid #444;
+            padding-bottom: 0.5rem;
+        }
+        .contact-item {
+            margin: 1rem 0;
+            padding: 1rem;
+            background: #fff;
+            border-radius: 4px;
+            border-left: 4px solid #222;
+        }
+        .contact-item strong {
+            color: #444;
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+        .contact-item a {
+            color: #222;
+            text-decoration: none;
+        }
+        .contact-item a:hover {
+            text-decoration: underline;
+        }
+        .contact-form {
+            background: #f8f8f8;
+            padding: 2rem;
+            border-radius: 8px;
+            display: none;
+        }
+        .contact-form h3 {
+            color: #222;
+            margin-bottom: 1.5rem;
+            border-bottom: 2px solid #444;
+            padding-bottom: 0.5rem;
+        }
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: #444;
+            font-weight: bold;
+        }
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-family: Arial, sans-serif;
+            font-size: 1rem;
+            box-sizing: border-box;
+        }
+        .form-group textarea {
+            height: 120px;
+            resize: vertical;
+        }
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #222;
+        }
+        .submit-btn {
+            background: #222;
+            color: #fff;
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: background 0.2s;
+        }
+        .submit-btn:hover {
+            background: #444;
+        }
+        @media (max-width: 768px) {
+            .contact-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Ethan GL Edwards</h1>
+    </header>
+    <nav>
+        <ul>
+            <li><a href="/index.html">Home</a></li>
+            <li><a href="/about.html">About</a></li>
+            <li><a href="/projects.html">Projects</a></li>
+            <li><a href="/contact.html" class="active">Contact</a></li>
+        </ul>
+    </nav>
+    <main>
+        <div class="contact-intro">
+            <h2>Get In Touch</h2>
+            <p>I'm always interested in discussing new opportunities, collaborations, or just having a conversation about technology and innovation.</p>
+        </div>
+
+        <div class="contact-grid">
+            <div class="contact-info">
+                <h3>Contact Information</h3>
+                
+                <div class="contact-item">
+                    <strong>Email</strong>
+                    <a href="mailto:ethan@egle.com">eth@ngledwards.co.uk</a>
+                </div>
+
+                <div class="contact-item">
+                    <strong>LinkedIn</strong>
+                    <a href="https://linkedin.com/in/ethanedwards" target="_blank">linkedin.com/in/ethanedwards</a>
+                </div>
+
+                <div class="contact-item">
+                    <strong>GitHub</strong>
+                    <a href="https://github.com/covertsheeke" target="_blank">github.com/covertsheeke</a>
+                </div>
+
+                <div class="contact-item">
+                    <strong>Location</strong>
+                    Available for remote work worldwide
+                </div>
+
+                <div style="margin-top: 2rem; padding: 1rem; background: #fff; border-radius: 4px;">
+                    <strong style="color: #222;">Response Time</strong>
+                    <p style="margin: 0.5rem 0 0 0; color: #666;">I typically respond to messages within 24 hours during business days.</p>
+                </div>
+            </div>
+
+            <div class="contact-form">
+                <h3>Send a Message</h3>
+                <form action="#" method="post">
+                    <div class="form-group">
+                        <label for="name">Name *</label>
+                        <input type="text" id="name" name="name" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="email">Email *</label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="subject">Subject *</label>
+                        <input type="text" id="subject" name="subject" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="message">Message *</label>
+                        <textarea id="message" name="message" placeholder="Tell me about your project or how I can help..." required></textarea>
+                    </div>
+
+                    <button type="submit" class="submit-btn">Send Message</button>
+                </form>
+
+                <div style="margin-top: 1.5rem; padding: 1rem; background: #fff; border-radius: 4px; font-size: 0.9rem; color: #666;">
+                    <strong>Note:</strong> This form is for demonstration purposes. Please use the direct contact methods above for now.
+                </div>
+            </div>
+        </div>
+    </main>
+</body>
+</html>

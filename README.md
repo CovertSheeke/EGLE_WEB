@@ -46,3 +46,25 @@ To deploy your site to Hetzner using Terraform, follow these steps:
     When you want to tear down the infrastructure, run `terraform destroy`.
 
 Make sure your `terraform.tf` files are configured for Hetzner and that you have the necessary API tokens set in your environment.
+
+---
+
+## Simplified Deployment with `deploy.sh`
+
+The deployment process has been streamlined. Since the server is already provisioned, you no longer need to manage infrastructure with Terraform. To deploy updates:
+
+1. **Commit and push your changes**  
+   First, make sure your local changes are committed and pushed to GitHub:
+   ```sh
+   git add .
+   git commit -m "Update website content"
+   git push origin main
+   ```
+
+2. **Deploy to server**  
+   Use the provided `deploy.sh` script to pull the latest changes and deploy:
+   ```sh
+   ./deploy.sh
+   ```
+
+This script connects to your server, pulls the latest code from your GitHub repository, and syncs the files to the web directory. Ensure you have the necessary SSH access and permissions configured.
