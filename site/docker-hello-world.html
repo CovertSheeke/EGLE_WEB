@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Docker Hello World - Ethan GL Edwards</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: #f9f9f9;
+        }
+        header {
+            background: #222;
+            color: #fff;
+            padding: 1.5rem 0;
+            text-align: center;
+        }
+        nav {
+            background: #444;
+        }
+        nav ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+        }
+        nav li {
+            margin: 0;
+        }
+        nav a {
+            display: block;
+            padding: 1rem 2rem;
+            color: #fff;
+            text-decoration: none;
+            transition: background 0.2s;
+        }
+        nav a:hover {
+            background: #666;
+        }
+        main {
+            max-width: 800px;
+            margin: 2rem auto;
+            padding: 2rem;
+            background: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+        }
+        .project-header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding-bottom: 2rem;
+            border-bottom: 2px solid #f0f0f0;
+        }
+        .project-header h1 {
+            color: #222;
+            margin-bottom: 0.5rem;
+        }
+        .project-meta {
+            color: #666;
+            font-size: 1.1rem;
+        }
+        .demo-section {
+            background: #f8f8f8;
+            padding: 2rem;
+            border-radius: 8px;
+            margin: 2rem 0;
+            text-align: center;
+        }
+        .demo-content {
+            background: #222;
+            color: #fff;
+            padding: 3rem 2rem;
+            border-radius: 8px;
+            margin: 1rem 0;
+            border: 3px solid #444;
+        }
+        .demo-content h2 {
+            margin: 0 0 1rem 0;
+            color: #4CAF50;
+        }
+        .demo-content p {
+            margin: 0.5rem 0;
+            font-size: 1.1rem;
+        }
+        .code-section {
+            margin: 2rem 0;
+        }
+        .code-section h3 {
+            color: #222;
+            margin-bottom: 1rem;
+            border-bottom: 2px solid #444;
+            padding-bottom: 0.5rem;
+        }
+        .code-block {
+            background: #2d2d2d;
+            color: #f8f8f2;
+            padding: 1.5rem;
+            border-radius: 4px;
+            font-family: 'Courier New', monospace;
+            overflow-x: auto;
+            margin: 1rem 0;
+        }
+        .command {
+            background: #1e1e1e;
+            color: #4CAF50;
+            padding: 1rem;
+            border-radius: 4px;
+            font-family: 'Courier New', monospace;
+            margin: 0.5rem 0;
+            border-left: 4px solid #4CAF50;
+        }
+        .tech-stack {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin: 1.5rem 0;
+        }
+        .tech-tag {
+            background: #222;
+            color: #fff;
+            padding: 0.5rem 1rem;
+            border-radius: 12px;
+            font-size: 0.9rem;
+        }
+        .back-link {
+            display: inline-block;
+            background: #444;
+            color: #fff;
+            padding: 0.75rem 1.5rem;
+            text-decoration: none;
+            border-radius: 4px;
+            margin-top: 2rem;
+            transition: background 0.2s;
+        }
+        .back-link:hover {
+            background: #222;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Ethan GL Edwards</h1>
+    </header>
+    <nav>
+        <ul>
+            <li><a href="/index.html">Home</a></li>
+            <li><a href="/about.html">About</a></li>
+            <li><a href="/projects.html">Projects</a></li>
+            <li><a href="/contact.html">Contact</a></li>
+        </ul>
+    </nav>
+    <main>
+        <div class="project-header">
+            <h1>Docker Hello World Container</h1>
+            <div class="project-meta">A simple containerized web application demonstrating Docker fundamentals</div>
+            <div class="tech-stack">
+                <span class="tech-tag">Docker</span>
+                <span class="tech-tag">Nginx</span>
+                <span class="tech-tag">HTML</span>
+                <span class="tech-tag">Containerization</span>
+            </div>
+        </div>
+
+        <div class="demo-section">
+            <h3>Live Demo</h3>
+            <p>This is what the containerized application looks like when running:</p>
+            <div class="demo-content">
+                <h2>🐳 Hello from Docker!</h2>
+                <p>Welcome to my containerized web application</p>
+                <p>Container ID: egle-hello-world-v1.0</p>
+                <p>Status: ✅ Running successfully</p>
+                <p>Built with: Docker + Nginx + Custom HTML</p>
+            </div>
+        </div>
+
+        <div class="code-section">
+            <h3>How to Run This Container</h3>
+            <p>You can run this exact container on any system with Docker installed:</p>
+            
+            <h4>Option 1: Using the existing Nginx image (Quick test)</h4>
+            <div class="command">
+docker run --rm -p 8080:80 --name hello-world-demo nginx:alpine
+            </div>
+            
+            <h4>Option 2: Build custom container with this project</h4>
+            <div class="command">
+# Clone the repository<br/>
+git clone https://github.com/covertsheeke/EGLE_WEB.git<br/>
+cd EGLE_WEB
+            </div>
+            
+            <div class="command">
+# Run with custom content<br/>
+docker run --rm -p 8080:80 -v "$(pwd)/site":/usr/share/nginx/html:ro nginx:alpine
+            </div>
+            
+            <p>Then visit <strong>http://localhost:8080</strong> to see the application running!</p>
+        </div>
+
+        <div class="code-section">
+            <h3>Dockerfile Example</h3>
+            <p>Here's how you could create a custom Dockerfile for this project:</p>
+            <div class="code-block">
+# Use official Nginx image as base
+FROM nginx:alpine
+
+# Copy custom HTML files to Nginx document root
+COPY site/ /usr/share/nginx/html/
+
+# Expose port 80
+EXPOSE 80
+
+# Start Nginx (default CMD from base image)
+            </div>
+        </div>
+
+        <div class="code-section">
+            <h3>Key Features</h3>
+            <ul>
+                <li><strong>Lightweight:</strong> Based on Alpine Linux for minimal size</li>
+                <li><strong>Fast:</strong> Nginx serves static content efficiently</li>
+                <li><strong>Portable:</strong> Runs consistently across any Docker environment</li>
+                <li><strong>Simple:</strong> Easy to understand and modify</li>
+                <li><strong>Replicable:</strong> Identical behavior every time</li>
+            </ul>
+        </div>
+
+        <div class="code-section">
+            <h3>Learning Outcomes</h3>
+            <p>This project demonstrates:</p>
+            <ul>
+                <li>Basic Docker containerization concepts</li>
+                <li>Volume mounting for development workflows</li>
+                <li>Port mapping for web applications</li>
+                <li>Using official base images effectively</li>
+                <li>Creating reproducible development environments</li>
+            </ul>
+        </div>
+
+        <a href="/projects.html" class="back-link">← Back to Projects</a>
+    </main>
+</body>
+</html>
