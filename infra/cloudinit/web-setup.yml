@@ -3,14 +3,48 @@ package_update: true
 package_upgrade: true
 
 packages:
-  - nginx
   - git
   - curl
+  - debian-keyring
+  - debian-archive-keyring
+  - apt-transport-https
+
+write_files:
+  - path: /etc/caddy/Caddyfile
+    content: |
+      ngledwards.co.uk {
+        root * /var/www/html
+        file_server
+        
+        # Enable compression
+        encode gzip
+        
+        # Security headers
+        header {
+          Strict-Transport-Security "max-age=31536000; includeSubDomains"
+          X-Content-Type-Options "nosniff"
+          X-Frame-Options "DENY"
+          X-XSS-Protection "1; mode=block"
+        }
+      }
+    permissions: '0644'
 
 runcmd:
-  - systemctl start nginx
-  - systemctl enable nginx
+  # Install Caddy
+  - curl -1sLf 'https://dl.cloudsmith.io/public/caddy/stable/gpg.key' | sudo gpg --dearmor -o /usr/share/keyrings/caddy-stable-archive-keyring.gpg
+  - curl -1sLf 'https://dl.cloudsmith.io/public/caddy/stable/debian.deb.txt' | sudo tee /etc/apt/sources.list.d/caddy-stable.list
+  - apt update
+  - apt install -y caddy
+  
+  # Create web directory
+  - mkdir -p /var/www/html
+  - chown -R caddy:caddy /var/www/html
+  
+  # Clone website
   - git clone https://github.com/covertsheeke/EGLE_WEB.git /tmp/website
-  - cp -r /tmp/website/* /var/www/html/
-  - chown -R www-data:www-data /var/www/html
-  - systemctl restart nginx
+  - cp -r /tmp/website/site/* /var/www/html/
+  - chown -R caddy:caddy /var/www/html
+  
+  # Start Caddy
+  - systemctl enable caddy
+  - systemctl start caddy
